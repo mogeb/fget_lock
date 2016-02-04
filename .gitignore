@@ -1,0 +1,18 @@
+# Object files
+*.o
+*.ko
+*.order
+Module.symvers
+/bin
+
+# QtCreator files
+*.creator
+*.creator.user
+*.config
+*.files
+*.includes
+
+# Other
+*.swp
+*.tmp_versions
+.~lock*
