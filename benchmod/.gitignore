@@ -1,0 +1,6 @@
+*.o
+*.ko
+*.o.cmd
+*.ko.cmd
+*.swp
+*.mod.c
