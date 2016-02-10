@@ -1,5 +1,5 @@
-obj-m += benchmod.o
-benchmod-objs := benchmod_src.o
+obj-m += fget_lock_module.o
+fget_lock_module-objs := fget_lock_module_src.o
 ccflags-y += -I$(src)
 
 all:

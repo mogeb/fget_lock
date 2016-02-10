@@ -5,7 +5,7 @@
 #define CREATE_TRACE_POINTS
 #include "empty_tp.h"
 
-#define PROC_ENTRY_NAME "benchmod"
+#define PROC_ENTRY_NAME "fget_lock_module"
 
 long benchmod_ioctl(
         struct file *file,

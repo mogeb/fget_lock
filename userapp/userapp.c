@@ -7,7 +7,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define BENCHMOD_NAME "/proc/benchmod"
+#define BENCHMOD_NAME "/proc/fget_lock_module"
 
 struct popt_args {
     int clear;
