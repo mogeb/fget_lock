@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -128,6 +129,7 @@ int main(int argc, char **argv)
     struct ioctl_args ioctl_arg;
     poptContext pc;
     pthread_t *threads;
+    int ncpus = sysconf(_SC_NPROCESSORS_ONLN);
 
     parse_args(argc, argv, &pc);
     printf("nthreads = %d, loop = %d\n", popt_args.nthreads, popt_args.loop);
@@ -150,6 +152,13 @@ int main(int argc, char **argv)
     pthread_barrier_init(&barrier, NULL, popt_args.nthreads);
     threads = (pthread_t*)malloc(popt_args.nthreads * sizeof(pthread_t));
     for(i = 0; i < popt_args.nthreads; i++) {
+        /* Set CPU affinity for each thread*/
+        cpu_set_t cpu_set;
+        pthread_attr_t attr;
+        CPU_ZERO(&cpu_set);
+        CPU_SET(i % ncpus, &cpu_set);
+        pthread_attr_init(&attr);
+        pthread_attr_setaffinity_np(&attr, sizeof(cpu_set), &cpu_set);
         pthread_create(&threads[i], NULL, do_work, (void*)&ioctl_arg);
     }
 
